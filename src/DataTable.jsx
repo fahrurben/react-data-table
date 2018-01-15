@@ -10,14 +10,14 @@ class DataTable extends React.Component {
 
     this.state = {
       dataOri: props.data,
-    	data: props.data,
-    	columns: props.columns,
+      data: props.data,
+      columns: props.columns,
       columnStates: [],
-    	isPaging: props.isPaging,
-    	total: props.total,
-    	totalPage: 0,
-    	page: 1,
-    	perPage: props.perPage
+      isPaging: props.isPaging,
+      total: props.total,
+      totalPage: 0,
+      page: 1,
+      perPage: props.perPage
     };
 
     this.navClicked = props.navClicked;
@@ -29,56 +29,78 @@ class DataTable extends React.Component {
 
     let columns = this.state.columns;
     let columnStates = this.state.columnStates;
-    
+
     _.forEach(columns, function(column) {
-      columnStates[column.name] = { isSorted: null}
+      columnStates[column.name] = {
+        isSorted: null
+      }
     });
 
-    this.setState({ dataOri: data });
-    this.setState({ columnStates: columnStates });
+    this.setState({
+      dataOri: data
+    });
+    this.setState({
+      columnStates: columnStates
+    });
   }
 
   componentWillReceiveProps(nextProps) {
 
-  	if(nextProps.data!=null) {
-      this.setState({ dataOri: nextProps.data });
-      this.setState({ data: nextProps.data });
+    if (nextProps.data != null) {
+      this.setState({
+        dataOri: nextProps.data
+      });
+      this.setState({
+        data: nextProps.data
+      });
     }
 
-    if(nextProps.page!=null) {
-    	this.setState({ page: nextProps.page });
+    if (nextProps.page != null) {
+      this.setState({
+        page: nextProps.page
+      });
     }
 
-    if(nextProps.total!=null) {
-    	let perPage = this.state.perPage;
+    if (nextProps.total != null) {
+      let perPage = this.state.perPage;
       let total = nextProps.total;
       let totalPage = parseInt(total / perPage);
       totalPage += total % perPage != 0 ? 1 : 0;
-      this.setState({ total: nextProps.total });
-      this.setState({ totalPage: totalPage });
+      this.setState({
+        total: nextProps.total
+      });
+      this.setState({
+        totalPage: totalPage
+      });
     }
   }
 
   gotoPage(e) {
     let page = e.target.innerHTML;
-    this.setState({ page: page });
+    this.setState({
+      page: page
+    });
     this.navClicked(page);
   }
 
   previousPage() {
     let page = this.state.page - 1;
-    this.setState({ page: page });
-  	this.navClicked(page);
+    this.setState({
+      page: page
+    });
+    this.navClicked(page);
   }
 
   nextPage() {
     let page = this.state.page + 1;
-    this.setState({ page: page });
+    this.setState({
+      page: page
+    });
     this.navClicked(page);
   }
 
   sort(name, isSorted) {
-    if(!isSorted) return;
+    if (!isSorted) return;
 
     let columnStates = this.state.columnStates;
     let type = null;
@@ -91,8 +113,8 @@ class DataTable extends React.Component {
         break;
       case 'desc':
         type = null;
-        break;    
-    }  
+        break;
+    }
 
 
     columnStates = _.forIn(columnStates, function(columnState) {
@@ -102,15 +124,19 @@ class DataTable extends React.Component {
 
     columnStates[name].isSorted = type;
 
-    let sortComparator = this.createComparator(name,type);
+    let sortComparator = this.createComparator(name, type);
     let data = _.cloneDeep(this.state.dataOri);
 
-    if(type!=null) {
+    if (type != null) {
       data = data.sort(sortComparator);
     }
 
-    this.setState({ data: data });
-    this.setState({ columnStates: columnStates });
+    this.setState({
+      data: data
+    });
+    this.setState({
+      columnStates: columnStates
+    });
   }
 
   createComparator(field, type) {
@@ -138,10 +164,10 @@ class DataTable extends React.Component {
 
     let rowProps = this.props.row;
 
-  	let fieldId = this.props.fieldId;
-  	let columns = this.state.columns;
-  	let data = this.state.data;
-  	let isPaging = this.state.isPaging;
+    let fieldId = this.props.fieldId;
+    let columns = this.state.columns;
+    let data = this.state.data;
+    let isPaging = this.state.isPaging;
     let columnStates = this.state.columnStates;
     let columnFrozenSize = 0;
     _.forEach(columns, function(column) {
@@ -149,10 +175,10 @@ class DataTable extends React.Component {
     });
 
     let tableWidth = '100%';
-    if(this.props.width !== '100%' && this.props.columnWidthType != '%') {
-      tableWidth = columns.map( col => col.width )
-        .filter( width => typeof width !== 'undefined' )
-        .reduce((accumulator,curr) => {
+    if (this.props.width !== '100%' && this.props.columnWidthType != '%') {
+      tableWidth = columns.map(col => col.width)
+        .filter(width => typeof width !== 'undefined')
+        .reduce((accumulator, curr) => {
           return accumulator + curr;
         });
     }
@@ -168,17 +194,17 @@ class DataTable extends React.Component {
       width: tableWidth - columnFrozenSize,
       tableLayout: this.props.tableLayout
     };
-    
+
     let leftSize = 0;
 
     return (
       <div className="data-table-wrapper">
         <div className="data-table-scroller" style={wrapperStyle}>
           <table className="data-table ui celled table" style={tableStyle}>
-          	<thead>
-    	        <tr className="data-table-row row-header" style={{height: rowProps.height}}>
-    	        	{
-    	        		columns.map((column,i) => {
+            <thead>
+              <tr className="data-table-row row-header" style={{height: rowProps.height}}>
+                {
+                  columns.map((column,i) => {
 
                     let thClasses = classNames({
                       'data-table-cell': true,
@@ -200,23 +226,23 @@ class DataTable extends React.Component {
 
                     leftSize += column.width;
 
-    	        			return (
+                    return (
                       <th key={i} className={thClasses} style={thStyles} onClick={() => this.sort(column.name,column.isSorted)}>
                         {column.label} <i className={iconStyle} aria-hidden="true"></i>
                       </th>
                     )
-    	        		})
-    	        	}
-    	        </tr>
-    	      </thead>
-    	      <tbody>
-    	      	{
+                  })
+                }
+              </tr>
+            </thead>
+            <tbody>
+              {
 
-    	      		data.map((row,i) => {
-    	      			let leftSize = 0;
+                data.map((row,i) => {
+                  let leftSize = 0;
 
                   let tds = columns.map((column,j) => {
-    	      				let value = row[column.accessor];
+                    let value = row[column.accessor];
 
                     let tdClasses = classNames({
                       'data-table-cell': true,
@@ -230,24 +256,24 @@ class DataTable extends React.Component {
 
                     leftSize += column.width;
 
-    	      				if(column.cell!=null) {
-    	      					let id = row[fieldId];
+                    if(column.cell!=null) {
+                      let id = row[fieldId];
                       let content = column.cell(value,id);
-    	      					return (<td key={j} align={column.align} className={tdClasses} style={tdStyles}>{content}</td>);
-    	      				}
-    	      				else {
-    	        				return (<td key={j} align={column.align} className={tdClasses} style={tdStyles}>{value}</td>);
-    	        			}
-    	        		});
+                      return (<td key={j} align={column.align} className={tdClasses} style={tdStyles}>{content}</td>);
+                    }
+                    else {
+                      return (<td key={j} align={column.align} className={tdClasses} style={tdStyles}>{value}</td>);
+                    }
+                  });
 
                   let trClasses = classNames({
                     'data-table-row': true
                   });
-    	      			let ret = (<tr key={i} className={trClasses} style={{height: rowProps.height}}>{tds}</tr>);
-    	      			return ret;
-    	      		})
-    	      	}
-    	      </tbody>
+                  let ret = (<tr key={i} className={trClasses} style={{height: rowProps.height}}>{tds}</tr>);
+                  return ret;
+                })
+              }
+            </tbody>
             {
               isPaging && this.state.totalPage > 1 &&
               <tfoot>
@@ -267,7 +293,7 @@ class DataTable extends React.Component {
                             'active': this.state.page == page
                           });
                           return (<a className={itemClass} onClick={this.gotoPage.bind(this)}>{page}</a>)
-                      	},this)
+                        },this)
                       }
                       { this.state.page < this.state.totalPage &&
                         <a class="icon item" onClick={this.nextPage.bind(this)}>
@@ -278,10 +304,10 @@ class DataTable extends React.Component {
                   </th>
                 </tr>
               </tfoot>
-          	}
+            }
           </table>
         </div>
-      </div>  
+      </div>
     )
   }
 
@@ -289,26 +315,26 @@ class DataTable extends React.Component {
 
 
 DataTable.propTypes = {
-	fieldId: PropTypes.string.isRequired,
+  fieldId: PropTypes.string.isRequired,
   row: PropTypes.shape({
-      height: PropTypes.number.optional
-    }).optional,
+    height: PropTypes.number.optional
+  }).optional,
   columns: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string.isRequired,
-			label: PropTypes.string.isRequired,
-      headerAlign: PropTypes.oneOf(['left', 'center', 'right']).optional,
-			accessor: PropTypes.string.isRequired,
-			cell: PropTypes.func.optional,
-      width: PropTypes.string.optional,
-      align: PropTypes.oneOf(['left', 'center', 'right']).optional,
-      isSorted: PropTypes.bool.optional,
-      isFrozen: PropTypes.bool.optional
-	  })).isRequired,
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    headerAlign: PropTypes.oneOf(['left', 'center', 'right']).optional,
+    accessor: PropTypes.string.isRequired,
+    cell: PropTypes.func.optional,
+    width: PropTypes.string.optional,
+    align: PropTypes.oneOf(['left', 'center', 'right']).optional,
+    isSorted: PropTypes.bool.optional,
+    isFrozen: PropTypes.bool.optional
+  })).isRequired,
   data: PropTypes.array,
   isPaging: PropTypes.bool.isRequired,
   width: PropTypes.string.optional,
   height: PropTypes.string.optional,
-  columnWidthType:PropTypes.oneOf(['px', 'em', 'rem', '%']).optional,
+  columnWidthType: PropTypes.oneOf(['px', 'em', 'rem', '%']).optional,
   fontSize: PropTypes.string.optional,
   tableLayout: PropTypes.string.optional
 };
