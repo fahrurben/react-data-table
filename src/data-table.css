@@ -1,56 +1,58 @@
-.data - table - wrapper {
-    position: relative;
-    border - top: 1 px solid# e7eaec;
-    border - right: 1 px solid# e7eaec;
-  }
-  .data - table - scroller {
-    clear: both;
-    overflow - x: auto;
-  }
+.data-table-wrapper {
+	position: relative;	
+	border-top: 1px solid #e7eaec;
+	border-right: 1px solid #e7eaec;
+}
+.data-table-scroller {
+	clear: both;
+	overflow-x: auto;
+}
 
-  .data - table {
-    border - collapse: collapse;
-    box - sizing: border - box;
-  }
-  .data - table tr th {
-    cursor: pointer;
-  }
-  .data - table - row: hover.data - table - cell,
-  .data - table - row.row - header.data - table - cell {
-    background - color: #f9f9f9;
-  }
+.data-table {
+	border-collapse: collapse;
+	box-sizing: border-box;
+}
+.data-table tr th {
+	cursor: pointer;
+}
+.data-table-row:hover .data-table-cell,
+.data-table-row.row-header .data-table-cell {
+  background-color: #f9f9f9;
+}
 
-  .data - table.ui.table tr td {
-    border: none;
-  }
-  .data - table.ui.table tr th {
-    border: none;
-    border - right: 1 px solid# e7eaec;
-    border - bottom: 1 px solid# e7eaec;
-    cursor: pointer;
-  }
-  .data - table.ui.table tr th: first - child {
-    border - left: 1 px solid# e7eaec;
-  }
-  .data - table.ui.table tr td.data - table - cell {
-    vertical - align: top;
-    background - color: #ffffff;
-    border - right: 1 px solid# e7eaec;
-    border - bottom: 1 px solid# e7eaec;
-  }
-  .data - table.ui.table tr td.data - table - cell: first - child {
-    border - left: 1 px solid# e7eaec;
-  }
-  .data - table - cell.frozen {
-    position: absolute;
-  }
+.data-table.ui.table tr td {
+	border: none;
+}
+.data-table.ui.table tr th {
+	border: none;
+	border-right: 1px solid #e7eaec;
+	border-bottom: 1px solid #e7eaec;
+	cursor: pointer;
+}
+.data-table.ui.table tr th:first-child {
+	border-left: 1px solid #e7eaec;
+}
+.data-table.ui.table tr td.data-table-cell {
+  vertical-align: top;
+  background-color: #ffffff;
+  border-right: 1px solid #e7eaec;
+  border-bottom: 1px solid #e7eaec;
+}
+.data-table.ui.table tr td.data-table-cell:first-child {
+  border-left: 1px solid #e7eaec;
+}
+.data-table-cell.frozen {
+	position:absolute; 
+}
 
-  .data - table tr th.asc {}
+.data-table tr th.asc {
+}
 
-  .data - table tr th.desc {}
+.data-table tr th.desc {
+}
 
-  .data - table - cell: focus {
-    outline: 2 px solid #66afe9;
+.data-table-cell:focus {
+  outline: 2px solid #66afe9;
   outline-offset: -2px;
 }
 
