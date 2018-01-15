@@ -4,11 +4,11 @@ import classNames from 'classnames';
 class DropdownInputFilter extends React.Component {
 
   constructor(props) {
-  	super(props);
+    super(props);
 
     this.state = {
-    	filter: props.filter,
-    	data: props.data
+      filter: props.filter,
+      data: props.data
     };
 
     this.inputChange = props.inputChange;
@@ -16,20 +16,22 @@ class DropdownInputFilter extends React.Component {
 
   onChange(e) {
     let value = e.target.value;
-    this.setState({ data: value });
+    this.setState({
+      data: value
+    });
     this.inputChange(value);
   }
 
   render() {
 
-  	let filter = this.state.filter;
-  	let data = this.state.data;
+    let filter = this.state.filter;
+    let data = this.state.data;
 
     let wide = filter.columnWidth || "three";
-    let fieldClasess = classNames([wide,'wide','field']);
-    
+    let fieldClasess = classNames([wide, 'wide', 'field']);
+
     return (
-    	<div className={fieldClasess}>
+      <div className={fieldClasess}>
         <label>{filter.label}</label>
         <div class="ui input">
           <select value={data} onChange={this.onChange.bind(this)}>
