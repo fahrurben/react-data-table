@@ -22336,7 +22336,7 @@ var DataTable = function (_React$Component) {
                 null,
                 _react2.default.createElement(
                   'th',
-                  { style: { width: '100%' } },
+                  { colspan: columns.length },
                   _react2.default.createElement(
                     'div',
                     { 'class': 'ui right floated pagination menu' },

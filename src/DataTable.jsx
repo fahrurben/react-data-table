@@ -278,7 +278,7 @@ class DataTable extends React.Component {
               isPaging && this.state.totalPage > 1 &&
               <tfoot>
                 <tr>
-                  <th style={{width: '100%'}}>
+                  <th colspan={columns.length}>
                     <div class="ui right floated pagination menu">
                       { this.state.page > 1 &&
                         <a class="icon item" onClick={this.previousPage.bind(this)}>
