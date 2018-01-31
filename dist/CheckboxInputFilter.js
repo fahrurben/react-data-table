@@ -4798,7 +4798,9 @@ var CheckboxInputFilter = function (_React$Component) {
   _createClass(CheckboxInputFilter, [{
     key: 'onChange',
     value: function onChange(e) {
-      this.setState({ data: !this.state.data });
+      this.setState({
+        data: !this.state.data
+      });
       this.inputChange(!this.state.data);
     }
   }, {

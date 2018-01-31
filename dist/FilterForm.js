@@ -22055,7 +22055,9 @@ var FilterForm = function (_React$Component) {
   }, {
     key: 'filterParaClicked',
     value: function filterParaClicked(e) {
-      this.setState({ isShowFilter: !this.state.isShowFilter });
+      this.setState({
+        isShowFilter: !this.state.isShowFilter
+      });
     }
   }, {
     key: 'submitClicked',
@@ -22079,9 +22081,15 @@ var FilterForm = function (_React$Component) {
       var inputChange = function inputChange(value) {
         var data = _this2.state.data;
         data[filter.name] = value;
-        _this2.setState({ data: data });
+        _this2.setState({
+          data: data
+        });
       };
-      return _react2.default.createElement(this.props.components[filter.type], { filter: filter, data: data, inputChange: inputChange }, null);
+      return _react2.default.createElement(this.props.components[filter.type], {
+        filter: filter,
+        data: data,
+        inputChange: inputChange
+      }, null);
     }
   }, {
     key: 'render',

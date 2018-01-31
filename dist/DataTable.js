@@ -22059,23 +22059,35 @@ var DataTable = function (_React$Component) {
       var columnStates = this.state.columnStates;
 
       _lodash2.default.forEach(columns, function (column) {
-        columnStates[column.name] = { isSorted: null };
+        columnStates[column.name] = {
+          isSorted: null
+        };
       });
 
-      this.setState({ dataOri: data });
-      this.setState({ columnStates: columnStates });
+      this.setState({
+        dataOri: data
+      });
+      this.setState({
+        columnStates: columnStates
+      });
     }
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
 
       if (nextProps.data != null) {
-        this.setState({ dataOri: nextProps.data });
-        this.setState({ data: nextProps.data });
+        this.setState({
+          dataOri: nextProps.data
+        });
+        this.setState({
+          data: nextProps.data
+        });
       }
 
       if (nextProps.page != null) {
-        this.setState({ page: nextProps.page });
+        this.setState({
+          page: nextProps.page
+        });
       }
 
       if (nextProps.total != null) {
@@ -22083,29 +22095,39 @@ var DataTable = function (_React$Component) {
         var total = nextProps.total;
         var totalPage = parseInt(total / perPage);
         totalPage += total % perPage != 0 ? 1 : 0;
-        this.setState({ total: nextProps.total });
-        this.setState({ totalPage: totalPage });
+        this.setState({
+          total: nextProps.total
+        });
+        this.setState({
+          totalPage: totalPage
+        });
       }
     }
   }, {
     key: 'gotoPage',
     value: function gotoPage(e) {
       var page = e.target.innerHTML;
-      this.setState({ page: page });
+      this.setState({
+        page: page
+      });
       this.navClicked(page);
     }
   }, {
     key: 'previousPage',
     value: function previousPage() {
       var page = this.state.page - 1;
-      this.setState({ page: page });
+      this.setState({
+        page: page
+      });
       this.navClicked(page);
     }
   }, {
     key: 'nextPage',
     value: function nextPage() {
       var page = this.state.page + 1;
-      this.setState({ page: page });
+      this.setState({
+        page: page
+      });
       this.navClicked(page);
     }
   }, {
@@ -22141,8 +22163,12 @@ var DataTable = function (_React$Component) {
         data = data.sort(sortComparator);
       }
 
-      this.setState({ data: data });
-      this.setState({ columnStates: columnStates });
+      this.setState({
+        data: data
+      });
+      this.setState({
+        columnStates: columnStates
+      });
     }
   }, {
     key: 'createComparator',
@@ -22310,7 +22336,7 @@ var DataTable = function (_React$Component) {
                 null,
                 _react2.default.createElement(
                   'th',
-                  { colSpan: '3' },
+                  { style: { width: '100%' } },
                   _react2.default.createElement(
                     'div',
                     { 'class': 'ui right floated pagination menu' },

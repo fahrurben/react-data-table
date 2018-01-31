@@ -4798,7 +4798,9 @@ var TextInputFilter = function (_React$Component) {
     key: 'onChange',
     value: function onChange(e) {
       var value = e.target.value;
-      this.setState({ data: value });
+      this.setState({
+        data: value
+      });
       this.inputChange(value);
     }
   }, {
